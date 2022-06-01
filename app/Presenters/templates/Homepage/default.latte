@@ -1,0 +1,29 @@
+{block content}
+<h1 n:block="title">My blog</h1>
+
+{foreach $dbcd as $cd}
+<div class="post">
+    <div class="id">{$cd->id}</div>
+
+    <h2>{$cd->nazev}</h2>
+
+    <div>{$cd->autor}</div>
+</div>
+{/foreach}
+
+<div class='p-4'>
+    <h2>Přidání řádku</h2>
+    <form id='editrow' action='home.php' method='post'>
+    <label class='form-check-label' for='nazev'>Název: </label> <input id='nazev' class='form-control' type='text' name='nazevCD' value=''>
+    <br>
+    <label class='form-check-label' for='delka'>Délka (minut): </label><input id='delka' class='form-control' type='text' name='delkaCD' value=''>
+    <br>
+    <label class='form-check-label' for='autor'>Autor: </label><input id='autor' class='form-control' type='text' name='autorCD' value=''>
+    <br>
+    <label class='form-check-label' for='datum'>Datum vydání: </label><input id='datum' class='form-control' type='date' name='datumCD' value=''>
+    <br>
+    <input class= 'btn btn-primary' type='submit' value='Přidat'>
+    <button type='reset' class= 'btn btn-primary' onclick=window.location.href='home.php';return false;> Zrušit </button>
+    </form>
+    </div>
+{/block}
