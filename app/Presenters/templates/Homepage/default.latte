@@ -1,29 +1,61 @@
 {block content}
-<h1 n:block="title">My blog</h1>
+<ul class="navig">
+	{*<li><a n:href="Homepage:">Homepage</a></li>*}
+	{if $user->isLoggedIn()}
+		<li><a n:href="Sign:out">Sign out</a></li>
+	{else}
+		<li><a n:href="Sign:in">Sign in</a></li>
+	{/if}
+</ul>
 
+<h1 n:block="title">CD</h1>
+
+<table class='table'>
+<tr>
+    <th></th>
+    <th>Název</th>
+    <th>Délka</th>
+    <th>Autor</th>
+    <th>Datum vydání</th>
+    <th>#id</th>
+</tr>
+{var $i=1}
 {foreach $dbcd as $cd}
-<div class="post">
-    <div class="id">{$cd->id}</div>
-
-    <h2>{$cd->nazev}</h2>
-
-    <div>{$cd->autor}</div>
-</div>
+    <tr>
+        <td>{$i++}</td>
+        <td>{$cd->nazev} </td>
+        <td>{$cd->delka} min</td>
+        <td>{$cd->autor}</td>
+        <td>{date('Y-m-d', strtotime($cd->datum))}</td>
+        <td>{$cd->id}</td>
+        {* <td class='noborder'>    
+            <form class='edtrow' action='edit.php' method='post'><input class='btn btn-primary' type='submit' name='upravit' value='Upravit'>
+            <input type='hidden' name='upravitcislo' value='$id'></form>
+        </td>
+        <td class='noborder'><button class='btn btn-primary' onclick=window.location.href='remove.php?smazatcislo=$id'> Smazat </button></td>
+        *}
+    </tr>
 {/foreach}
+</table>
 
-<div class='p-4'>
-    <h2>Přidání řádku</h2>
-    <form id='editrow' action='home.php' method='post'>
-    <label class='form-check-label' for='nazev'>Název: </label> <input id='nazev' class='form-control' type='text' name='nazevCD' value=''>
-    <br>
-    <label class='form-check-label' for='delka'>Délka (minut): </label><input id='delka' class='form-control' type='text' name='delkaCD' value=''>
-    <br>
-    <label class='form-check-label' for='autor'>Autor: </label><input id='autor' class='form-control' type='text' name='autorCD' value=''>
-    <br>
-    <label class='form-check-label' for='datum'>Datum vydání: </label><input id='datum' class='form-control' type='date' name='datumCD' value=''>
-    <br>
-    <input class= 'btn btn-primary' type='submit' value='Přidat'>
-    <button type='reset' class= 'btn btn-primary' onclick=window.location.href='home.php';return false;> Zrušit </button>
-    </form>
-    </div>
+{control commentForm}
+
+{* <h2>Přidání řádku</h2>
+{form add}
+<form id='editrow' action='' method='post'>
+<label class='form-check-label' for='nazev'>Název: </label> <input id='nazev' class='form-control' type='text' name='nazevCD' value=''>
+<br>
+<label class='form-check-label' for='delka'>Délka (minut): </label><input id='delka' class='form-control' type='text' name='delkaCD' value=''>
+<br>
+<label class='form-check-label' for='autor'>Autor: </label><input id='autor' class='form-control' type='text' name='autorCD' value=''>
+<br>
+<label class='form-check-label' for='datum'>Datum vydání: </label><input id='datum' class='form-control' type='date' name='datumCD' value=''>
+<br>
+<input class= 'btn btn-primary' type='submit' value='Přidat'>
+<button type='reset' class= 'btn btn-primary' onclick=window.location.href='home.php';return false;> Zrušit </button>
+</form>
+{/form} *}
+
+
+
 {/block}

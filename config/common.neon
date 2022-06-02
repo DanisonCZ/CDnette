@@ -15,3 +15,8 @@ di:
 	export:
 		parameters: no
 		tags: no
+
+security:
+	users:
+		admin: heslo  # user 'admin', password 'heslo'
+
