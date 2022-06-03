@@ -1,16 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
 {block content}
-<ul class="navig">
-	{*<li><a n:href="Homepage:">Homepage</a></li>*}
-	{if $user->isLoggedIn()}
-		<li><a n:href="Sign:out">Sign out</a></li>
-	{else}
-		<li><a n:href="Sign:in">Sign in</a></li>
-	{/if}
-</ul>
+
+{if $user->isLoggedIn()}
+    <a class="tlacitko" n:href="Sign:out">Sign out</a>
+{else}
+    <a class="tlacitko" n:href="Sign:in">Sign in</a>
+{/if}
+
 
 <h1 n:block="title">CD</h1>
 
-<table class='table'>
+<br>
+
+{control commentForm}
+
+<br>
+
+<table class='table obsah'>
 <tr>
     <th></th>
     <th>Název</th>
@@ -38,8 +48,6 @@
 {/foreach}
 </table>
 
-{control commentForm}
-
 {* <h2>Přidání řádku</h2>
 {form add}
 <form id='editrow' action='' method='post'>
@@ -59,3 +67,10 @@
 
 
 {/block}
+
+<script>
+	alert("test");
+</script>
+
+</body>
+</html>

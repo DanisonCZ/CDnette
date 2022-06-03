@@ -21,6 +21,7 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
         $paginator->setPage(1); // číslo aktuální stránky
         $paginator->setItemsPerPage(30); // počet položek na stránce
         $paginator->setItemCount(356); // celkový počet položek, je-li znám
+
 	}
 
     public function startup(): void
@@ -45,21 +46,25 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
         $form = new Form; // means Nette\Application\UI\Form
 
         $form->addText('nazevCD', 'Název: ')
-            ->setRequired('Zadejte název CD');
+            ->setRequired('Zadejte název CD')
+            ->setDefaultValue("CD");
 
         $form->addInteger('delkaCD', 'Délka: ')
             ->setRequired('Zadejte délku CD')
             ->addRule(
                 [HomepagePresenter::class, 'validateOver0'],
                 'Délka musí být vetší než 0'
-            );
+            )
+            ->setDefaultValue(100);
 
         $form->addText('autorCD', 'Autor: ')
-            ->setRequired('Zadejte dautora CD');
+            ->setRequired('Zadejte autora CD')
+            ->setDefaultValue("autor");
 
         $form->addText('datumCD', 'Datum vydání: ')
             ->setType('Date')
-            ->setRequired('Zadejte datum vydání CD');
+            ->setRequired('Zadejte datum vydání CD')
+            ->setDefaultValue("2000-01-01");
 
         $form->addSubmit('send', 'Přidat');
 
@@ -86,11 +91,10 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
             'autor' => $data->autorCD,
             'datum' => $data->datumCD,
         ]);
-            $this->flashMessage('Záznam přidán', 'success');
         } else {
             $this->flashMessage('špatný formát délky');
         }
-        $this->redirect('this');
+        //$this->redirect('this');
     }
 
 }
